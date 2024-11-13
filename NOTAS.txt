@@ -1,0 +1,20 @@
+Como funcion una app SPA o single page application
+
+1. La manera en como funciona es que el usuario entra a una URL con dominio como una pagina web normal, sin embargo, al momento de entrar a la pagina se inicia la primera solicitud.
+
+2. El servidor responde con una respuesta llamada response la mayoria de las veces, esta respuesta contiene la aplicacion o la gran mayoria de la misma. En dicha respuesta se obtiene el HTML de la aplicacion, mas referencias a enlaces externos si es se llegaran a necesitar, como CDN, estilos, etc. Todo este proceso descrito anteriormente se encarga de realizarlo el framework que estamos usando, en este caso React, y esto no es malo al 100% del dia.
+
+Ahora bien la pregunta viene cuando el usuario solamente quiere ver una parte de la aplicacion, es decir, en lugar de cargar toda la app, solamente quiere ver la pagina de mi perfil por ejemplo?
+
+Algo muy importante de saber y reconocer es que el SPA no es CEO friendly. Es decir, solamente la primera pagina de un SPA es realmente la encargada de generar todo el SEO de la pagina, todas las demas paginas no entran en cuenta
+
+QUE ES EL SEO
+Search Engine Optimization, o SEO, es el proceso de mejorar la visibilidad de una página web en los resultados. A profundidad son BOTS que andan en la web, y que son los responsables de analizar nuestro sitio en busca de enlaces, palabras clave, etc. y que nos dan una puntuacion de 1 a 10, de esta forma logran categorizar las paginas y depende de la calificacion puede salir o no en los resultados de busqueda.
+
+Un caso de uso de esto mismo es cuando el usuario quiere entrar o busca algo en google, y los resultados llevan a una app web, pero llevan a un punto exacto de la aplicacion, no a la aplicacion en si. Esto es posible gracias a que el SEO es capaz de analizar todas las paginas de la aplicacion y poder llevar al usuario a la pagina que mas se ajusta a lo que busca.
+
+Es mas, nosotros como programadores podemos ayudarle al bot de google a saber cuando una pagina quiero que se siga mostrando y cuando una pagina solamente va estar disponible por un limite de tiempo
+
+En esto mismo, NEXT reluce puesto que es experto en servir contenido estatico y generado desde el lado del servidor
+
+Dicho esto una vez, quedamos al tanto de que es NEXT, y para que funciona, asi que procedemos a tocar codigo plenamente
