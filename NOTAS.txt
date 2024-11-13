@@ -18,3 +18,6 @@ Es mas, nosotros como programadores podemos ayudarle al bot de google a saber cu
 En esto mismo, NEXT reluce puesto que es experto en servir contenido estatico y generado desde el lado del servidor
 
 Dicho esto una vez, quedamos al tanto de que es NEXT, y para que funciona, asi que procedemos a tocar codigo plenamente
+
+TURBOPACK
+Turbopack se encuentra en beta pero puede habilitarse en el package.json agregando --turbo al script de desarrollo por el momento.
