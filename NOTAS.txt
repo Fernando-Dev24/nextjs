@@ -34,3 +34,23 @@ RUTAS ADICIONALES
 Es importante recordar que todo lo que queramos enrutar en nuestra app debe de estar dentro de la carpeta /app, asi mismo, hay nombres ya definidos como /app/pages, /app/components, /app/api, /app/utils, y nombres de archivos como layout, page, error, loading, entre otros
 
 Para crear rutas que esten a la par de la ruta app, basta con crear las carpetas de dichas rutas dentro de /app y luego crear el archivo page.tsx con el esqueleto de dicha pagina escrito obviamente en TSX. Tambien es importante configuar bien la app para que muestre informacion de metatags correctamente para que se ayude al SEO automaticamente.
+
+METADATAS Y metatags
+Cuando la app carga la pagin esta busca la metadata en la misma pagina, sin embargo, si no la encuentra, seguira buscando en archivos de mayor jerarquia, hasta llegar al punto mas alto de la app
+
+Layouts y Layouts anidados
+Por defecto nextJS ya viene con un layout que se le conoce como el root layout debido a que ahi se encuentra el punto mas alto de nuestra app. Esto a su vez es un HOC debido a que estamos mandando children, es decir, le mandamos los componentes que queremos que renderice
+
+Los layout se suelen usar para darle un estilo a nuestra app, y para que se vea bien en diferentes dispositivos, y podemos hacer que solamente se muestre en determinadas partes de nuestra app exceptuando otras. Por esto es que el layout debe de ser un HOC donde nosotros decidimos a donde lo mandamos
+
+snippet: lrc
+
+lo que sucede detras de cortinas es que /app lee cada directorio y en la ruta donde encuentra el layout.tsx adjunta los children que serian los demas componentes, en este caso si solo tenemos page.tsx, adjunta eso directamente como children
+
+Si queremos que diferentes rutas compartan el mismo layout, basta con crear un nuevo directorio que podemos ponerle cualquier nombre, y movemos todas las rutas que queramos dentro de ese directorio, una vez realizado eso, procedemos a crear un archivo layout dentro de /general, esto automaticamente aplicara el layout para cada ruta dentro de /general, ahora bien para indicarle a nextjs que general no lo tome como una ruta basta con renombrar el directorio y escribirlo entre parentes (general)
+
+Ahora bien, cuando nos toca crear componentes compartidos entre paginas, como una barra de navegacion, footer, o cualquier otra cosa lo haremos en un directorio llamado components en la raiz de la /app
+
+IMPORTANTE: Todos los componentes que no sean definidos como client-side componentes no funcionan igual que los componentes de toda la vida de React. Es decir, si hacemos un console.log, esto solamente se ejecuta en el servidor, y que es el servidor, pues la consola donde estamos ejecutando nuestra app por el momento.
+
+Este poder de Server Componentes nos permite hacer cosas muy geniales sin interferir en la carga de componentes, y liberando asi memoria del cliente. Por ejemplo podemos hacer que nuestro componentes sean asincronos y obtener, mandar datos a la base de datos, esto se conoce como server actions
