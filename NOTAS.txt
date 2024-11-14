@@ -21,3 +21,16 @@ Dicho esto una vez, quedamos al tanto de que es NEXT, y para que funciona, asi q
 
 TURBOPACK
 Turbopack se encuentra en beta pero puede habilitarse en el package.json agregando --turbo al script de desarrollo por el momento.
+
+ARCHIVOS Y DIRECTORIOS
+README, en este archivo nosotros como programadores deberiamos de dejar una serie de instrucciones para los futuros programadores que vean nuestra app y decirle como levantar la aplicacion, como instalar ciertas imagenes de docker si es que las necesitamos y cualquier otro minimo de informacion necesaria para que la app funcione
+
+CARPETA APP
+La carpeta app es la base de nuestro proyecto o app, y de hecho el archivo conocido como layout.tsx es el encargado, todo lo que modifiquemos dentro de el es como si estuvieramos modificando el archivo HTML de una pagina tradicional
+
+Importante, el modulo next/font/google nos permite cargar fuentes de google fonts sin necesidad de otro paquete
+
+RUTAS ADICIONALES
+Es importante recordar que todo lo que queramos enrutar en nuestra app debe de estar dentro de la carpeta /app, asi mismo, hay nombres ya definidos como /app/pages, /app/components, /app/api, /app/utils, y nombres de archivos como layout, page, error, loading, entre otros
+
+Para crear rutas que esten a la par de la ruta app, basta con crear las carpetas de dichas rutas dentro de /app y luego crear el archivo page.tsx con el esqueleto de dicha pagina escrito obviamente en TSX. Tambien es importante configuar bien la app para que muestre informacion de metatags correctamente para que se ayude al SEO automaticamente.
