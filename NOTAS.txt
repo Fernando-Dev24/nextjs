@@ -54,3 +54,23 @@ Ahora bien, cuando nos toca crear componentes compartidos entre paginas, como un
 IMPORTANTE: Todos los componentes que no sean definidos como client-side componentes no funcionan igual que los componentes de toda la vida de React. Es decir, si hacemos un console.log, esto solamente se ejecuta en el servidor, y que es el servidor, pues la consola donde estamos ejecutando nuestra app por el momento.
 
 Este poder de Server Componentes nos permite hacer cosas muy geniales sin interferir en la carga de componentes, y liberando asi memoria del cliente. Por ejemplo podemos hacer que nuestro componentes sean asincronos y obtener, mandar datos a la base de datos, esto se conoce como server actions
+
+Por ejemplo si creamos una funcion que resuelva una promesa en determinados segundos lo hara sin problema. Ahora solo queda imaginar las posibilidades que nos da esto para mostrar estados de carga, loadings, errors, entre miles de cosas mas
+
+NEXT/LINK
+Esta es la forma que Next recomienda para navegar entre rutas dentro de una pagina web creada con Next, sin embargo, tiene un comportamiento por defecto. Esto sucede cuando el usuario pasa encima del enlace Next hace la precarga de dicha ruta para mejorar la experiencia del usuario y que el cambio se sienta instantaneo
+
+Una cosa muy bonita de NextJS es que como se ejecuta del lado del servidor, no importa que el usuario tengo o no habilitado Javascript, ya que es el servidor el que se encarga de realizar la ejecucion del codigo correspondiente.
+
+PRESENTACION - SERVER COMPONENTS
+
+Hay cuatro puntos muy importante para entender Next v+13
+
+1. Por defecto todo lo que hagamos es un server component a no ser que se especifique lo contrario
+2. Renderizado estatico, esto quiere decir que NextJS renderiza la pagina en el servidor y la envia al cliente con la menor cantidad de codigo JS posible, esto ayuda en la performance de la app
+3. Fetch a cache, una vez que Next ha renderizado la pagina en el servidor, la app se encarga de guardarla en cache hasta que se tenga que usar. Hay formas de indicarle si queremos guardar la info en cache o no.
+4. Esto al final concluye en una cosa muy importante, MENOS USO DE EFFECTS, este y otros hooks no se pueden ejecutar en server components, a no ser que se indique lo contrario
+
+Una cosa muy importante es que NextJS nos permite crear server components de una manera facil y es porque asi quieren que trabajemos, sin embargo, hay ciertos componentes en ciertas ocasiones que si o si vamos a necesitar que se ejecuten solamente del lado del servidor
+
+Los propios hooks de NextJS nos ayudan a darnos cuenta de cuando necesitamos setear un componente como client y cuando no, en este caso por ejemplo, al intentar hacer un ActiveLink nos dice explicitamente que necesitamos setear como cliente
