@@ -58,7 +58,7 @@ Este poder de Server Componentes nos permite hacer cosas muy geniales sin interf
 Por ejemplo si creamos una funcion que resuelva una promesa en determinados segundos lo hara sin problema. Ahora solo queda imaginar las posibilidades que nos da esto para mostrar estados de carga, loadings, errors, entre miles de cosas mas
 
 NEXT/LINK
-Esta es la forma que Next recomienda para navegar entre rutas dentro de una pagina web creada con Next, sin embargo, tiene un comportamiento por defecto. Esto sucede cuando el usuario pasa encima del enlace Next hace la precarga de dicha ruta para mejorar la experiencia del usuario y que el cambio se sienta instantaneo
+Esta es la forma que Next recomienda para navegar entre rutas dentro de una pagina web creada con Next, sin embargo, tiene un comportamiento por defecto. Esto sucede cuando el usuario pasa encima del enlace Next hace la precarga de dicha ruta para mejorar la experiencia del usuario y que el cambio se sienta instantaneo. Podemos deshabilitar este comportamiento pasando una propiedad llamada prefetch a false.
 
 Una cosa muy bonita de NextJS es que como se ejecuta del lado del servidor, no importa que el usuario tengo o no habilitado Javascript, ya que es el servidor el que se encarga de realizar la ejecucion del codigo correspondiente.
 
