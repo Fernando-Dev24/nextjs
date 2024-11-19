@@ -1,0 +1,27 @@
+INICIO DE PROYECTO 02-MY-DASHBOARD
+
+Cuando un proyecto empieza a crecer bastante es recomendable usar o decirle al create-next-app que use la carpeta src para almacenar todo el codigo fuente de la pagina.
+
+IMPORTANTE: Existe una funcion que viene desde next/navigation que nos permite rediccionar a la persona a una pagina en especial. Esta funcion admite un string como parametro que es la nueva ruta a la queremos acceder. OJO: Esta funcion retorna never, es decir, detiene toda la ejecucion de codigo abajo de su llamada si es que lo hubiera, por lo que es recomendable no escribir mas codigo luego de dicha llamada a la funcion debido a que la app nunca ejecutara dicho codigo
+
+PAGINA DE CREACION DE COMPONENTES USANDO TAILWIND
+Puede que a veces se usen muchos vectores para ello por lo que es necesario encajar los nombres de los atributos a como lo hace react para evitar errores
+https://www.creative-tim.com/templates/tailwind
+
+TIP
+Cuando estamos programando en Next desde la version 13 en adelante es recomendable pensar siempre que estamos programando desde el lado del servidor, esto nos ayudara a que si en algun punto necesitamos hooks del lado del cliente, el mismo servidor nos mandara una alerta de que eso que estamos haciendo solo funciona de tal lugar, ese mensaje es el que necesitamos para saber cuando un componente es necesario del lado del cliente o del servidor
+
+NEXT/IMAGE
+Este componente propio de Next nos permite tener varias posibilidades a la hora de mostrar una imagen, una de ellas es que viene con lazyload por defecto y podemos configurarla para que se cargue bajo prioridad si asi lo necesitamos. Algo muy importante es que bloquea las imagenes de diferentes dominios para evitar todo tipo de hackeos
+
+para configurar los dominios permitidos hacemos lo siguiente:
+images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      }
+    ]
+  }
+
+Esto en el archivo next.config.ts
