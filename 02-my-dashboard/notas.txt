@@ -25,3 +25,6 @@ images: {
   }
 
 Esto en el archivo next.config.ts
+
+PROBLEMAS CON LOS SERVER COMPONENTS Y LOS CLIENT COMPONENTS
+Uno de los problemas que mas nos vamos a enfrentar es que necesitamos algun componente que si o si debe de usar hooks propios de react por lo que facilmente vamos a tener que usar el use client, sin embargo por ejemplo nos impide la posibilidad de darle metadatos debido a que al usar el use client, el componente ya no es un server component, por lo que no podemos dar cabida a metadatos en ese componente en especifico
