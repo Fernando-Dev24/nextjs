@@ -28,3 +28,10 @@ Esto en el archivo next.config.ts
 
 PROBLEMAS CON LOS SERVER COMPONENTS Y LOS CLIENT COMPONENTS
 Uno de los problemas que mas nos vamos a enfrentar es que necesitamos algun componente que si o si debe de usar hooks propios de react por lo que facilmente vamos a tener que usar el use client, sin embargo por ejemplo nos impide la posibilidad de darle metadatos debido a que al usar el use client, el componente ya no es un server component, por lo que no podemos dar cabida a metadatos en ese componente en especifico
+
+DATA FETCHING EN NEXT 15
+Next agrega funcionalidad a la fetch API propia de JS agregando opciones como revalidacion de cache, solicitudes en parelelo o cascada, etc.
+
+Sin embargo, en Next 13, que es el curso que estoy viendo el cache era forzado para toda request, sin embargo, en Next 15, el cache es optativo, es decir, el programador debe decidir si quiere que se almacene en cache o no, esto se hace usando el mismo fetch api de siempre pero agregando un objeto con la key/value de cache: 'force-cached' o 'no-cache' que es el comportamiento por defecto
+
+Importante, a pesar de que si se puede crear la peticion dentro del functionalComponent es mejor separar funciones, y luego en el componente solamente llamarlas, ademas, si la peticion se maneja con async/await se debe de hacer un async functional component agregando la palabra async segun la sintaxis de la funcion lo requiera.
