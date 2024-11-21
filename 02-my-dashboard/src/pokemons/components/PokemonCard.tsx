@@ -13,6 +13,7 @@ export const PokemonCard = ({ id, name }: SimplePokemon) => {
             width={100}
             height={100}
             alt={`Pokemon: ${name}`}
+            priority={false} // img cargada bajo demanda
             style={{
               width: "100%",
               height: "auto",

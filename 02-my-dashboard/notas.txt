@@ -35,3 +35,18 @@ Next agrega funcionalidad a la fetch API propia de JS agregando opciones como re
 Sin embargo, en Next 13, que es el curso que estoy viendo el cache era forzado para toda request, sin embargo, en Next 15, el cache es optativo, es decir, el programador debe decidir si quiere que se almacene en cache o no, esto se hace usando el mismo fetch api de siempre pero agregando un objeto con la key/value de cache: 'force-cached' o 'no-cache' que es el comportamiento por defecto
 
 Importante, a pesar de que si se puede crear la peticion dentro del functionalComponent es mejor separar funciones, y luego en el componente solamente llamarlas, ademas, si la peticion se maneja con async/await se debe de hacer un async functional component agregando la palabra async segun la sintaxis de la funcion lo requiera.
+
+Next nos permite manejador dos tipos de errores, uno cuando el error es esperado, es decir, una request que sabemos que pueda dar error o cualquier otra cosa, y un error no esperado, es decir, algo que fallo y que no lo hemos manejado correctamente.
+
+Para realizar una pagina de error debemos de ponerla en el mismo directorio donde nosotros queremos mostrar el error, ademas, NextJS nos ofrece una funcion especial que se llama notfound que nos permite redirigir a la pagina de error que nosotros queramos.
+
+RUTAS DINAMICAS
+Cuando queremos tener rutas dinamicas podemos crear un directorio con el nombre de la pagina/[id o parametro]/page.tsx
+
+Esto automaticamente hace el prefetch de la pagina en cuestion y automaticamente en el componente tenemos informacion que llego directamente por ser una ruta dinamica, los parametros llegan en forma de promesa. El contenido de los parametros son: params, y searchParams en caso que incluyamos queries en la URL
+
+CAMBIO: En next13 estos parametros eran pasados al componente como props sincronas, es decir, estaban listas para ser usadas, sin embargo, en Next15 estas props de rutas dinamicas son asincronas, por lo que primero es necesario manejarlo, o esperar, la respuesta del servidor a dichas props. Esto se usa mediante async/await, sin embargo, en React Components que se rendericen por el cliente pueda ser necesario que se use React.use en lugar del async/await
+
+Una vez tenemos ya los params que el server component recibe, podemos manejar API request al elemento con ese id en especifico, etc
+
+METADATA DINAMICA

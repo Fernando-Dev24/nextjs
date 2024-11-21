@@ -1,5 +1,5 @@
-import { PokemonsResponse, SimplePokemon } from "@/app/pokemons";
-import { PokemonGrid } from "@/app/pokemons";
+import { PokemonsResponse, SimplePokemon } from "@/pokemons";
+import { PokemonGrid } from "@/pokemons";
 
 const getPokemons = async (
   limit = 20,
@@ -14,6 +14,8 @@ const getPokemons = async (
     id: pokemon.url.split("/").at(-2)!,
     name: pokemon.name,
   }));
+
+  // throw new Error("Esto es un error que no deberia de suceder");
 
   return pokemons;
 };
