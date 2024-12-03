@@ -1,0 +1,15 @@
+COMO CONFIGURAR REDUX EN NEXT JS
+El problema surge cuando redux necesita inicializarse mediante su provider, sin embargo, el hecho de hacer esto convendria usar use client lo cual mataria todos los beneficios de next js y los server components. Para lograr que ambos trabajen juntos sin comprometer la metodologia de trabajo de los demas tenemos que hacer lo siguiente
+
+Crear un archivo de Providers donde llamaremos a Provider de redux y ahi adjuntaremos el store que estamos creando de redux. Esto lo renderizamos en el layout de nuestra app. Importante colocar la directiva de use client en el Providers.
+
+OJO: Esta solucion pudiera parecer ser la correcta sin embargo vamos a enfrentarnos a un problema y es que cuando queramos que nuestro server le mande un estado en concreto a nuestro global state vamos a tener que almacenarlo en un HTTP o algo por el estilo. Esto se soluciona mas rapido usando cookies que almacenen la informacion para que este disponible en el cache de la app web.
+
+CONFIGURAR STORE PARA DISPARAR ACCIONES Y SABER COMO ESTA EL ESTADO
+Agregar estas dos lineas al final de store/index.ts
+
+// Usamos estos dos hooks en lugar de usar useSelector y useDispatch como se usaba anteriormente, o se usa en vanilla js
+export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
+export const useAppSelector = useSelector.withTypes<RootState>();
+
+Para decirle a nuestro reducer action que necesitamos un payload usamos PayloadAction de redux tookit y mediante el tipado ponemos el valor que esperamos en el payload
