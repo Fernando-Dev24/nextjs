@@ -13,3 +13,12 @@ export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 export const useAppSelector = useSelector.withTypes<RootState>();
 
 Para decirle a nuestro reducer action que necesitamos un payload usamos PayloadAction de redux tookit y mediante el tipado ponemos el valor que esperamos en el payload
+
+RESTFUL API
+NextJS ofrece una manera de manejar todos los eventos de una API Restful. Para esto ellos recomiendan crear una carpeta /api junto con el archivo route.js que esto nos permitira realizar cualquier accion que nosotros queramos. Ahora es importante saber que en ese directorio de api no podemos de ninguna manera adjuntar un archivo page porque entonces se ejecutaria el page antes que el route.ts
+
+Por asi decirlo tenemos nuestro servidor usando la misma logica que nuestro frontend. Igualmente Next nos ayuda a mantener un orden no admitiendo que tengamos un page.ts y un route.ts en la misma carpeta.
+
+Todos los endpoints creados con NextJS tienen que devolverse usando NextResponse y en formato JSON. Luego en el componente que queramos simplemente podemos obtener el valor haciendo un fetch a dicho endpoint
+
+En dado caso queramos ejecutar un endpoint al no mas la app cargue lo recomendable es hacerlo en el Provider del estado global, sea que se use contextAPI o redux. De esta forma siempre se ejecutara al cargar la app

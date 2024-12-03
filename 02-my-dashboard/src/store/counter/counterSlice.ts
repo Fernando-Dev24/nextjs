@@ -2,16 +2,24 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface CounterState {
   count: number;
+  isReady: boolean;
 }
 
-const initialState = {
+const initialState: CounterState = {
   count: 5,
-} as CounterState;
+  isReady: false,
+};
 
 const counter = createSlice({
   name: "counter",
   initialState,
   reducers: {
+    initCounterState: (state, action: PayloadAction<number>) => {
+      if (state.isReady) return;
+      state.count = action.payload;
+      state.isReady = true;
+    },
+
     addOne: (state) => {
       state.count++;
     },
@@ -28,6 +36,7 @@ const counter = createSlice({
   },
 });
 
-export const { addOne, substractOne, resetCount } = counter.actions;
+export const { initCounterState, addOne, substractOne, resetCount } =
+  counter.actions;
 
 export default counter.reducer;

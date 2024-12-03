@@ -1,16 +1,41 @@
 "use client";
 
 import { useAppDispatch, useAppSelector } from "@/store";
-import { addOne, resetCount, substractOne } from "@/store/counter/counterSlice";
+import {
+  addOne,
+  initCounterState,
+  resetCount,
+  substractOne,
+} from "@/store/counter/counterSlice";
+import { useEffect } from "react";
 
 interface Props {
   value?: number;
 }
 
+interface CounterResponse {
+  count: number;
+}
+
+const getApiCounter = async (): Promise<CounterResponse> => {
+  const data = await fetch("/api/counter").then((res) => res.json());
+
+  return data;
+};
+
 export const CartCounter = ({ value = 0 }: Props) => {
   // Obtenemos el estado del counter
   const count = useAppSelector((state) => state.counter.count);
   const dispatch = useAppDispatch();
+
+  // Inicializar el counter cuando se carga por primera vez, una vez haya sido cargado una vez este hook effect ya no se ejecutara mas
+  /* useEffect(() => {
+    dispatch(initCounterState(value));
+  }, [dispatch, value]); */
+
+  useEffect(() => {
+    getApiCounter().then(({ count }) => dispatch(initCounterState(count)));
+  }, [dispatch]);
 
   return (
     <>
