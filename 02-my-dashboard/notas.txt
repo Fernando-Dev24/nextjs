@@ -22,3 +22,8 @@ Por asi decirlo tenemos nuestro servidor usando la misma logica que nuestro fron
 Todos los endpoints creados con NextJS tienen que devolverse usando NextResponse y en formato JSON. Luego en el componente que queramos simplemente podemos obtener el valor haciendo un fetch a dicho endpoint
 
 En dado caso queramos ejecutar un endpoint al no mas la app cargue lo recomendable es hacerlo en el Provider del estado global, sea que se use contextAPI o redux. De esta forma siempre se ejecutara al cargar la app
+
+CREAR UN CUSTOM MIDDLEWARE
+Los custom middleware de Redux tienen que crearse usando el getDefaultMiddleware de redux. Para hacerlo tenemos que crear una nueva funcion que reciba el state de tipo middlewareAPI
+
+Los custom middleware tienen que ejecutarse usando el middlewareAPI para el state, y tiene que regresar dos cosas: un dispatch de tipo Dispatch e implicitamente el action de tipo Action
