@@ -1,0 +1,7 @@
+Una migracion en los ORM significa que algun cambio que realizamos podemos o tendremos mejor dicho una migracion que Prisma se encargara de crearla para que los cambios realizados se hagan correctamente en la base de datos
+
+Para hacerlo con Prisma podemos usar npx prisma migrate [migration_name]
+
+Estas migraciones tienen que hacerse siempre que se quieran eliminar, agregar campos, entre miles de cosas mas
+
+npx prisma generate se encarga de preparar prisma para realizar las ejecuciones pertinentes con nuestro codigo
