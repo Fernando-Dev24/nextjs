@@ -10,6 +10,8 @@ docker compose up -d
 
 2. Renombrar .env.template to .env y reemplazar las variables de entorno de usuario y password
 
+3. Ejecutar el seed para [crear la base de datos local](localhost:3000/api/seed)
+
 # Levantar la app
 
 ```

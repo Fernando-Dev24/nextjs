@@ -5,3 +5,10 @@ Para hacerlo con Prisma podemos usar npx prisma migrate [migration_name]
 Estas migraciones tienen que hacerse siempre que se quieran eliminar, agregar campos, entre miles de cosas mas
 
 npx prisma generate se encarga de preparar prisma para realizar las ejecuciones pertinentes con nuestro codigo
+
+INSERTAR SEMILLA
+La insercion de una semilla o el termino de una quiere decir no comenzar a desarollar sin tener ningun registro en la base de datos o esperar a tener una base de datos completa.
+
+Lo que se busca es poder comenzar con el desarrollo teniendo ya algo que nosotros podamos usar para simular el contenido final. El objetivo del seed es purgar la base de datos y hacer una insercion masiva de elementos de prueba.
+
+Cuando nos referimos a purgar quiere decir borrar todos los datos, si es que los hubiera, de la base de datos y dejarla como recien creada
