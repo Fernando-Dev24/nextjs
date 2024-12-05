@@ -1,5 +1,6 @@
-import prisma from "@/app/lib/prisma";
 import { NextResponse, NextRequest } from "next/server";
+import prisma from "@/app/lib/prisma";
+import * as yup from "yup";
 
 export async function GET(request: NextRequest) {
   // Obtener los parametros de la URL
@@ -32,4 +33,24 @@ export async function GET(request: NextRequest) {
   });
 
   return NextResponse.json(todos);
+}
+
+const POST_SCHEMA = yup.object({
+  description: yup.string().required("Escribe la descripcion del todo"),
+  complete: yup.boolean().optional().default(false),
+});
+
+export async function POST(request: NextRequest) {
+  try {
+    const { complete, description } = await POST_SCHEMA.validate(
+      await request.json()
+    ); // Cuando hay una propiedad que no se encuentra en el modelo prisma solo retorna un client version, lo mejor es que cuando validemos el body obtengamos solo aquellas keys que vamos a trabajar
+
+    const newTodo = await prisma.todo.create({
+      data: { complete, description },
+    });
+    return NextResponse.json(newTodo);
+  } catch (error) {
+    return NextResponse.json(error, { status: 400 });
+  }
 }
