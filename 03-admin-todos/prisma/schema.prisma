@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,11 +7,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Definir modelo de base de datos
 model Todo {
-  id          String   @id @default(uuid()) // Marcamos como unico con @ y por defecto podemos darle un formato, en este caso, estamos mandando que el id sea en formato uuid
+  id          String   @id @default(uuid())
   description String
   complete    Boolean  @default(false)
-  createdAt   DateTime @default(now()) // Valor por defecto del tiempo en el momento que se cree la instancia
-  updatedAt   DateTime @updatedAt // @updatedAt tomara el tiempo en el que se actualice un registro siguiendo este modelo
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+//model Employee {
+//id        Int      @id @default(autoincrement())
+//name      String   @db.VarChar
+//lastName  String   @db.VarChar
+//isAdmin   Boolean  @default(true)
+//createdAt DateTime @default(now()) @db.Timestamp(6)
+//roles     String[] @default([])
+//}

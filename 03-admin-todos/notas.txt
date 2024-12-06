@@ -12,3 +12,9 @@ La insercion de una semilla o el termino de una quiere decir no comenzar a desar
 Lo que se busca es poder comenzar con el desarrollo teniendo ya algo que nosotros podamos usar para simular el contenido final. El objetivo del seed es purgar la base de datos y hacer una insercion masiva de elementos de prueba.
 
 Cuando nos referimos a purgar quiere decir borrar todos los datos, si es que los hubiera, de la base de datos y dejarla como recien creada
+
+Prima db pull obtiene el schema de una base de datos ya definida y la obtiene para que tengamos nuestros modelos ya listos en nuestro codigo, luego de hacer un db pull siempre deberiamos de hacer un prisma generate
+
+Por ultimo si necesitamos hacer un cambio en el modelo y hacemos un migrate dev o el nombre que queramos va a borrar dicha tabla, esto con el objetivo de siempre estar en sintonia de la base de datos junto con los modelos. Hay que tener cuidado con eso
+
+Si queremos hacer esta sintonia de datos podemos usar db push pero teniendo en cuenta que ese proceso no pasa por migraciones
