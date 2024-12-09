@@ -18,3 +18,10 @@ Prima db pull obtiene el schema de una base de datos ya definida y la obtiene pa
 Por ultimo si necesitamos hacer un cambio en el modelo y hacemos un migrate dev o el nombre que queramos va a borrar dicha tabla, esto con el objetivo de siempre estar en sintonia de la base de datos junto con los modelos. Hay que tener cuidado con eso
 
 Si queremos hacer esta sintonia de datos podemos usar db push pero teniendo en cuenta que ese proceso no pasa por migraciones
+
+ACTUALIZAR LOS RESULTADOS OBTENIDOS DESDE UN ENDPOINT EN NEXTJS
+Una cosa que es importante saber es que al trabajar con resful handlers pues podemos obtener la data utilizando las ventajas de los server components. Sin embargo, tambien vale la pena recalcar sus contras y es que no podemos recargar el componente nuevamente cuando hay una actualizacion.
+
+De este tema hay poca informacion de NextJS porque queda mucho a la discrecion del programador. Sin embargo, una de las alternativas o work around para lograr el objetivo es:
+
+1. usando router.refresh de next/navigation -> Esta funcion especial de Next pudiera pensarse que me va a recargar la pagina, y puede ser si, pero en realidad lo que esta haciendo es que NextJS se encargue de recargar solo aquellos elementos del arbol del DOM que sufrieron cambios. En pocas palabras es un refresh de aquellos elementos que tienen que ser cambiados debido a un cambio en su estado, pero no es un refresh destructivo donde tenga que cargarse nuevamente la aplicacion para lograr visualizar los cambios

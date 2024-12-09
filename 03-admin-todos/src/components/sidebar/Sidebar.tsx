@@ -3,7 +3,25 @@ import Link from "next/link";
 
 import { SidebarItem, SidebarLogo } from "..";
 import { CiLogout } from "react-icons/ci";
-import { CiBookmarkCheck } from "react-icons/ci";
+import { CiBookmarkCheck, CiPen, CiDatabase } from "react-icons/ci";
+
+const navItems = [
+  {
+    label: "Dashboard",
+    path: "/dashboard",
+    icon: <CiBookmarkCheck size={30} />,
+  },
+  {
+    label: "Todos",
+    path: "/dashboard/rest-todos",
+    icon: <CiPen size={30} />,
+  },
+  {
+    label: "Server Actions",
+    path: "/dashboard/server-todos",
+    icon: <CiDatabase size={30} />,
+  },
+];
 
 export const Sidebar = () => {
   return (
@@ -35,16 +53,9 @@ export const Sidebar = () => {
         <ul className="space-y-2 tracking-wide mt-8">
           {/* TODO: src/components <SidebarItem /> */}
           {/* Active className: text-white bg-gradient-to-r from-sky-600 to-cyan-400 */}
-          <SidebarItem
-            label="Dashboard"
-            path="/dashboard"
-            icon={<CiBookmarkCheck size={30} />}
-          />
-          <SidebarItem
-            label="Todos"
-            path="/dashboard/rest-todos"
-            icon={<CiBookmarkCheck size={30} />}
-          />
+          {navItems.map((item) => (
+            <SidebarItem key={item.path} {...item} />
+          ))}
         </ul>
       </div>
 
