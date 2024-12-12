@@ -4,6 +4,7 @@ import Link from "next/link";
 import { SidebarItem, SidebarLogo } from "..";
 import { CiLogout } from "react-icons/ci";
 import { CiBookmarkCheck, CiPen, CiDatabase } from "react-icons/ci";
+import { IoCart, IoCodeWorkingOutline } from "react-icons/io5";
 
 const navItems = [
   {
@@ -20,6 +21,16 @@ const navItems = [
     label: "Server Actions",
     path: "/dashboard/server-todos",
     icon: <CiDatabase size={30} />,
+  },
+  {
+    label: "Cookies",
+    path: "/dashboard/cookies",
+    icon: <IoCodeWorkingOutline size={30} />,
+  },
+  {
+    label: "Products",
+    path: "/dashboard/products",
+    icon: <IoCart size={30} />,
   },
 ];
 

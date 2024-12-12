@@ -2,13 +2,10 @@
 
 import { useState } from "react";
 import { IoTrashOutline } from "react-icons/io5";
-import { createTodo, deleteCompletedTodos } from "../helpers/todos";
-import { useRouter } from "next/navigation";
 import { Todo } from "@prisma/client";
+import { createTodo, deleteCompletedTodos } from "../actions/todos-actions";
 
 export const NewTodo = () => {
-  const router = useRouter();
-
   const [description, setDescription] = useState("");
 
   const onSubmit = async (e: React.FormEvent): Promise<Todo | void> => {
@@ -16,15 +13,12 @@ export const NewTodo = () => {
 
     if (description.trim().length === 0) return;
 
-    const newTodo = await createTodo(description);
-    router.refresh();
+    await createTodo(description);
     setDescription("");
-    return newTodo;
   };
 
   const handleDelete = async () => {
     await deleteCompletedTodos();
-    router.refresh();
   };
 
   return (

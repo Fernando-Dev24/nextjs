@@ -5,3 +5,5 @@ export { SidebarLogo } from "./sidebar/SidebarLogo";
 export { TopMenu } from "./menu/TopMenu";
 
 export { WidgetItem } from "./widgets/WidgetItem";
+
+export { TabBar } from "./TabBar";

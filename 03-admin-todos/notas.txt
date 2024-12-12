@@ -25,3 +25,41 @@ Una cosa que es importante saber es que al trabajar con resful handlers pues pod
 De este tema hay poca informacion de NextJS porque queda mucho a la discrecion del programador. Sin embargo, una de las alternativas o work around para lograr el objetivo es:
 
 1. usando router.refresh de next/navigation -> Esta funcion especial de Next pudiera pensarse que me va a recargar la pagina, y puede ser si, pero en realidad lo que esta haciendo es que NextJS se encargue de recargar solo aquellos elementos del arbol del DOM que sufrieron cambios. En pocas palabras es un refresh de aquellos elementos que tienen que ser cambiados debido a un cambio en su estado, pero no es un refresh destructivo donde tenga que cargarse nuevamente la aplicacion para lograr visualizar los cambios
+
+NPM CHECK UPDATES
+El paquete de ncu nos ayuda a verificar cuales dependencias hay que actualizarse para obtener las nuevas caracteristicas si las hubiera.
+
+Para instalarlo podemos ejecutar npm install -g npm-check-updates y luego en el proyecto usar ncu, esto nos lista las dependencias que deberian de actualizarse y para hacerlo podemos ejecutar ncu --upgrade
+
+SERVER ACTIONS
+Leyendo la documentacion se usa una estandarizacion de que todas aquellas funciones que son acciones o server actions se pueden crear en un directorio que se llame actions y el archivo puede actions o cualquier otro nombre.
+
+Los server actions SOLO se ejecutan del lado del servidor, por lo que al momento de crear una funcion podemos indicarle mediante 'use server' que solo se ejecute del lado del servidor
+
+EXTRA: Los server actions pueden mandarse a llamar en un formulario mediante su attr llamado action, es importante saber que toda aquella funcion que se ejecute mediante se attr, por defecto recibira un nuevo objeto de FormData con las entradas del formulario. Por lo que ya no es necesario manejar un estado para cada entrada del mismo
+
+Una vez ejecutada una server action para revalidar la informacion y que se muestre en el UI podemos utilizar revalidateTag o revalidatePath que se encargan de reconstruir nuevamente solo aquellas piezas del DOM que sufriero un cambio, es lo mismo que refresh de router/navigation
+
+Actualizaciones Optimistas
+Este es un hook de React que solamente afecta a la forma en que el usuario percibe que la aplicacion esta funcionando. Es decir, esto aumenta el tiempo de respuesta de la app hacia una accion que haga el usuario sin embargo todo se queda en forma visual porque el rendimiento de la app detras de la cortina es exactamente el mismo
+
+Funciona: Como aclare antes esto solamente es una transicion visual prediciendo que el resultado de nuestra operación sea correcto. Para usarlo debemos de importar dos hook: useTransition, y useOptimistic
+
+El useOptimistic recibe el estado actual de lo que nosotros queremos que renderice la UI. Y podemos obtener el estado de dicha optimizacion como si fuera un useState, sin embargo, como segundo argumento recibira la callback fn que se encargara de cambiar el estado al que nosotros le digamos
+
+Por ultimo usamos una funcion nueva que se encargue de ejecutar la funcion de setOptimistic por ejemplo que cambiara el estado de la accion a la prediccion de si todo salio correctamente. Es importante encerrar esto en un try catch para que en dado caso de un error poder dejar el estado como estaba anteriormente.
+
+Ahora bien, esto se combina con useTransition porque este hook nos devuelve un isPending y una funcion para iniciar una transicion entre el estado actual y el estado de exito. Esto nos permite poder renderizar un loader spinner o cualquier otra cosa que le diga al usuario que se esta cambiando algo.
+
+COOKIES
+Las cookies son una parte importante de una pagina debido a que contienen informacion sobre lo que el usuario está creando. Por ejemplo, digamos que yo estoy interesado en comprar camisetas, la informacion de lo que yo estoy buscando se guarda en las cookies y nos muestra informacion respecto a esas preferencias.
+
+Tambien nos sirve como informacion temporal sobre cuanto de cada producto por ejemplo esta llevando el usuario.
+
+Tecnicamente hablando las cookies no es lo mismo al localstorage debido a que en localstorage nosotros deberiamos de hacer el push de la informacion de las cookies al servidor manualmente. Sin embargo, en las cookies ellas ya se comunican SIEMPRE con el servidor de forma automatica por lo que nos ahorramos tiempo
+
+Una cosa importante de saber es que las cookies y que se comuniquen con el servidor hace que la pagina que esta visitando el usuario se convierta automaticamente en un sitio generado del lado del servidor. Sin embargo, podemos hacer que las cookies estén disponibles en el cliente para cualquier otra cosa que queramos hacer.
+
+Para acceder a las cookies del lado del cliente podemos usar el paquete cookies-next. Del lado del servidor next ofrece su propia documentacion
+
+A diferencia de las cookies en Next 13, ahora las cookies son asincronas por lo que debemos de obtenerlas de forma asincrona
