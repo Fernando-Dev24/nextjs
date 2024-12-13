@@ -63,3 +63,12 @@ Una cosa importante de saber es que las cookies y que se comuniquen con el servi
 Para acceder a las cookies del lado del cliente podemos usar el paquete cookies-next. Del lado del servidor next ofrece su propia documentacion
 
 A diferencia de las cookies en Next 13, ahora las cookies son asincronas por lo que debemos de obtenerlas de forma asincrona
+
+AUTH JS
+En este curso he seguido usando Next Auth pero puede ser que en futuros proyectos lo hagamos con Auth js que es el nuevo paquete, actualmente siguen migrando la configuracion
+
+Importante, para cada proveedor que vayamos a usar debemos de tener una app oAuth que es algo asi como un JWT que devuelve un token
+
+Importante si queremos proteger todas aquellas rutas podemos hacer la configuracion que vamos a hacer en el archivo de layout
+
+Para leer la informacion del lado del servidor usamos getServerSession y si necesitamos usar la data del lado del cliente usamos useSession() el cual tiene que estar envuelto en un SessionProvider
