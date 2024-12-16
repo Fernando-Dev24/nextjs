@@ -34,3 +34,21 @@ or install Prisma and then run
 ```
 npm prisma init
 ```
+
+Debido a la nueva forma de trabajar con next-auth/beta de Auth.js el cual ya no es solo para next si no que tiene varios frameworks a su disposicion se ha cambiado la forma de instalar y configurar dicha autenticacion. A continuacion están los pasos para lograr configurarlo de forma correcta
+
+# Configurar Auth.js en su versión 1.2.3
+
+1. Reconstruir modulos de node
+
+```
+npm install
+```
+
+2. Generar clave secreta
+
+```
+npx auth secret
+```
+
+Esto crea una nueva llave secreta en .env.local que es la convencion de NextJS sin embargo puedes copiar dicha clave y exportarla en un .env normal si asi lo necesitas
