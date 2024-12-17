@@ -1,13 +1,13 @@
-import { auth } from "@/config/auth";
 import { Sidebar, TopMenu } from "../../components";
 import { redirect } from "next/navigation";
+import { getUserSession } from "@/auth/actions/auth-actions";
 
 export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
+  const session = await getUserSession();
 
   if (!session) redirect("/api/auth/signin");
 

@@ -12,6 +12,11 @@ docker compose up -d
 
 3. Ejecutar el seed para [crear la base de datos local](localhost:3000/api/seed)
 
+## NOTA
+
+**usuario:** test1@google.com
+**password:** 123456
+
 # Levantar la app
 
 ```

@@ -4,9 +4,17 @@ export const revalidate = 0; // fuerza a que la pagina se vuelva a construir cad
 import prisma from "@/app/lib/prisma";
 import { TodosGrid } from "../../../todos/components/TodosGrid";
 import { NewTodo } from "../../../todos/components/NewTodo";
+import { getUserSession } from "@/auth/actions/auth-actions";
 
 export default async function ServerTodosPage() {
-  const todos = await prisma.todo.findMany({ orderBy: { description: "asc" } });
+  const user = await getUserSession();
+
+  const todos = await prisma.todo.findMany({
+    orderBy: { description: "asc" },
+    where: {
+      userId: user?.id,
+    },
+  });
 
   return (
     <>
