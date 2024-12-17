@@ -7,6 +7,10 @@ import { IoShieldOutline } from "react-icons/io5";
 export const LogoutButton = () => {
   const { status } = useSession();
 
+  const onSignOut = async () => {
+    await signOut();
+  };
+
   if (status === "loading") {
     return (
       <button className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
@@ -30,7 +34,7 @@ export const LogoutButton = () => {
 
   return (
     <button
-      onClick={() => signOut()}
+      onClick={onSignOut}
       className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group"
     >
       <CiLogout />

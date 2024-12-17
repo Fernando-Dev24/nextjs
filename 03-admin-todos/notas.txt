@@ -72,3 +72,10 @@ Importante, para cada proveedor que vayamos a usar debemos de tener una app oAut
 Importante si queremos proteger todas aquellas rutas podemos hacer la configuracion que vamos a hacer en el archivo de layout
 
 Para leer la informacion del lado del servidor usamos getServerSession y si necesitamos usar la data del lado del cliente usamos useSession() el cual tiene que estar envuelto en un SessionProvider
+
+En next-auth de auth.js se cambiar el getServerSession por un metodo simple llamado auth()
+
+COMO AGREGAR INFORMACION CUANDO SE CREA LA SESSION DEL USUARIO
+En el archivo de configuracion de auth.js podemos ejecutar callbacks cuando se inicia sesion, cuando se crea la sesion y la estrategia a utilizar y cuando se crea la sesion del usuario
+
+El orden en el que se ejecuta es jwt y luego session en dado caso nosotros lo hayamos declarado asi, si no hay callbacks con dichos nombres solamente se ejecuta normalmente
