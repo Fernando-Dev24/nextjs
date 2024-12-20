@@ -1,5 +1,7 @@
 "use client";
 
+import { useUIStore } from "@/store";
+import clsx from "clsx";
 import Link from "next/link";
 import {
   IoCloseOutline,
@@ -13,24 +15,37 @@ import {
 } from "react-icons/io5";
 
 export const Sidebar = () => {
+  const { isSideMenuOpen, closeSideMenu } = useUIStore((state) => state);
+
   return (
     <div>
       {/* BACKGROUND */}
-      <div className="fixed top-0 left-0 w-screen h-screen z-10 bg-black opacity-30" />
+      {isSideMenuOpen && (
+        <div className="fixed top-0 left-0 w-screen h-screen z-10 bg-black opacity-30"></div>
+      )}
 
       {/* BLUR */}
-      <div className="fade-in fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm" />
+      {isSideMenuOpen && (
+        <div
+          onClick={closeSideMenu}
+          className="fade-in fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"
+        ></div>
+      )}
 
       {/* NAVBAR */}
       <nav
-        // todo: efecto
-        className="fixed p-5 right-0 top-0 w-[500px] h-screen bg-white z-20 shadow-2xl transform transition-all duration-300 overflow-y-auto scrollbar"
+        className={clsx(
+          "fixed p-5 right-0 top-0 w-[500px] h-screen bg-white z-20 shadow-2xl transform transition-all duration-300 overflow-y-auto scrollbar",
+          {
+            "translate-x-full": !isSideMenuOpen,
+          }
+        )}
       >
         {/* CLOSE ICON */}
         <IoCloseOutline
           size={50}
           className="absolute top-5 right-5 cursor-pointer"
-          onClick={() => console.log("click")}
+          onClick={closeSideMenu}
         />
 
         {/* INPUT */}
@@ -46,7 +61,7 @@ export const Sidebar = () => {
         {/* OPCIONES DEL MENU */}
         <Link
           href={"/"}
-          className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded-transition-all"
+          className="flex items-center mt-10 p-2 rounded-md hover:bg-gray-100 rounded-transition-all"
         >
           <IoPersonOutline size={30} />
           <span className="ml-3 text-xl">Perfil</span>
@@ -54,7 +69,7 @@ export const Sidebar = () => {
 
         <Link
           href={"/"}
-          className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded-transition-all"
+          className="flex items-center mt-10 p-2 rounded-md hover:bg-gray-100 rounded-transition-all"
         >
           <IoTicketOutline size={30} />
           <span className="ml-3 text-xl">Ordenes</span>
@@ -62,7 +77,7 @@ export const Sidebar = () => {
 
         <Link
           href={"/"}
-          className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded-transition-all"
+          className="flex items-center mt-10 p-2 rounded-md hover:bg-gray-100 rounded-transition-all"
         >
           <IoLogInOutline size={30} />
           <span className="ml-3 text-xl">Ingresar</span>
@@ -70,7 +85,7 @@ export const Sidebar = () => {
 
         <Link
           href={"/"}
-          className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded-transition-all"
+          className="flex items-center mt-10 p-2 rounded-md hover:bg-gray-100 rounded-transition-all"
         >
           <IoLogOutOutline size={30} />
           <span className="ml-3 text-xl">Salir</span>
@@ -81,7 +96,7 @@ export const Sidebar = () => {
 
         <Link
           href={"/"}
-          className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded-transition-all"
+          className="flex items-center mt-10 p-2 rounded-md hover:bg-gray-100 rounded-transition-all"
         >
           <IoShirtOutline size={30} />
           <span className="ml-3 text-xl">Productos</span>
@@ -89,7 +104,7 @@ export const Sidebar = () => {
 
         <Link
           href={"/"}
-          className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded-transition-all"
+          className="flex items-center mt-10 p-2 rounded-md hover:bg-gray-100 rounded-transition-all"
         >
           <IoTicketOutline size={30} />
           <span className="ml-3 text-xl">Ordenes</span>
@@ -97,7 +112,7 @@ export const Sidebar = () => {
 
         <Link
           href={"/"}
-          className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded-transition-all"
+          className="flex items-center mt-10 p-2 rounded-md hover:bg-gray-100 rounded-transition-all"
         >
           <IoPeopleOutline size={30} />
           <span className="ml-3 text-xl">Usuarios</span>
