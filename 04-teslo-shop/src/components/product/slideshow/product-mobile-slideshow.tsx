@@ -36,6 +36,10 @@ export const ProductMobileSlideshow = ({ images, title, ...props }: Props) => {
             <Image
               width={600}
               height={500}
+              style={{
+                maxWidth: "600px",
+                maxHeight: "500px",
+              }}
               src={`/products/${item}`}
               alt={title}
               className="object-fill"
