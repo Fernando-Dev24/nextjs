@@ -5,7 +5,7 @@ import {
   ProductSlideshow,
   ProductMobileSlideshow,
 } from "@/components";
-import { initialData } from "@/seed";
+import { initialData } from "@/seed/seed";
 import { titleFont } from "@/config/fonts";
 
 interface Props {

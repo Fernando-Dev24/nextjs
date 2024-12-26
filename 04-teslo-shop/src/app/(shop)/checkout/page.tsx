@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Title } from "../../../components/ui/title/title";
-import { initialData } from "@/seed";
+import { initialData } from "@/seed/seed";
 import Image from "next/image";
 
 const productsInCart = [

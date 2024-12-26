@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { initialData } from "@/seed";
+import { initialData } from "@/seed/seed";
 import { Title } from "@/components";
 import type { Category } from "@/interfaces";
 import { ProductsGrid } from "../../../../components/products/grids/products-grid";

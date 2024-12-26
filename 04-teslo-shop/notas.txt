@@ -1,0 +1,3 @@
+El seed o la ejecucion del seed es practicamente una pequeña parte de una app de node que nos permite darle vida a nuestra base de datos.
+
+Esto no llega a produccion y solamente se queda de alguna forma para trabajar con desarrollo

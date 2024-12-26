@@ -1,5 +1,5 @@
 import { Title } from "@/components";
-import { initialData } from "@/seed";
+import { initialData } from "@/seed/seed";
 import Image from "next/image";
 import clsx from "clsx";
 import { IoCardOutline } from "react-icons/io5";

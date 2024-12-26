@@ -1,5 +1,5 @@
 import { Title, ProductsGrid } from "@/components";
-import { initialData } from "@/seed";
+import { initialData } from "@/seed/seed";
 
 export default function Home() {
   const products = initialData.products;
