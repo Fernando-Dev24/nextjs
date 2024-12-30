@@ -1,3 +1,5 @@
 El seed o la ejecucion del seed es practicamente una pequeña parte de una app de node que nos permite darle vida a nuestra base de datos.
 
 Esto no llega a produccion y solamente se queda de alguna forma para trabajar con desarrollo
+
+Cuando tenemos relaciones en nuestra base de datos, a la funcion finMany o find normal podemos pasarle un objeto con la key de include, podemos indicarle cuantas imagenes queremos tomar y si queremos seleccionar solo una columna de dicha tabla. Si no ponemos esto ultimo tomara todas las columnas de la tabla
