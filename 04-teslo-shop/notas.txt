@@ -3,3 +3,5 @@ El seed o la ejecucion del seed es practicamente una pequeña parte de una app d
 Esto no llega a produccion y solamente se queda de alguna forma para trabajar con desarrollo
 
 Cuando tenemos relaciones en nuestra base de datos, a la funcion finMany o find normal podemos pasarle un objeto con la key de include, podemos indicarle cuantas imagenes queremos tomar y si queremos seleccionar solo una columna de dicha tabla. Si no ponemos esto ultimo tomara todas las columnas de la tabla
+
+La renderizacion del lado del servidor nos permite revalidar constantemente y bajo demanda la informacion requerida. De esta forma podemos permitir que el server component se revalide X cantidad de tiempo y permanezca en cache y luego solamente aquella informacion importante se recargue con cada iteraccion nueva.

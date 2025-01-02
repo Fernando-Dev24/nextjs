@@ -1,8 +1,9 @@
+export const revalidate = 60;
+
 import { notFound, redirect } from "next/navigation";
 import { Gender } from "@prisma/client";
 import { Title, Pagination, ProductsGrid } from "@/components";
 import { getPaginatedProductsWithImages } from "@/actions";
-
 interface Props {
   params: Promise<{
     gender: Gender;
