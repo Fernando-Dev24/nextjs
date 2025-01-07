@@ -3,14 +3,13 @@ export const revalidate = 604800; // 7 dias
 import { notFound } from "next/navigation";
 import { getProductBySlug } from "@/actions";
 import {
-  SizeSelector,
-  QuantitySelector,
   ProductSlideshow,
   ProductMobileSlideshow,
   StockLabel,
 } from "@/components";
 import { titleFont } from "@/config/fonts";
 import { Metadata } from "next";
+import { AddToCart } from "./ui/AddToCart";
 
 interface Props {
   params: Promise<{
@@ -79,17 +78,7 @@ export default async function ProductPage({ params }: Props) {
 
         <p className="text-lg mb-5">${product.price}</p>
 
-        {/* SELECTOR DE TALLAS */}
-        <SizeSelector
-          selectedSize={product.sizes[0]}
-          availableSizes={product.sizes}
-        />
-
-        {/* selector de cantidad */}
-        <QuantitySelector quantity={2} />
-
-        {/* button */}
-        <button className="btn-primary my-5">Agregar al carrito</button>
+        <AddToCart product={product} />
 
         {/* DESCRIPCION */}
         <h3 className="font-bold text-sm">Descripcion</h3>
