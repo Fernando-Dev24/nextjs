@@ -8,8 +8,8 @@ interface State {
   getTotalItems: () => number;
 
   addProductToCart: (product: CartProduct) => void;
-  // updateProductQuantity
-  // removeProduct
+  updateProductQuantity: (product: CartProduct, quantity: number) => void;
+  removeProduct: (size: string) => void;
 }
 
 // Persist middlware guarda el estado automaticamente en localstorage y lo recupera al mismo tiempo para usarlo
@@ -46,6 +46,28 @@ export const useCartStore = create<State>()(
           });
 
           set({ cart: updateCartProducts });
+        },
+        updateProductQuantity: (product, quantity) => {
+          const { cart } = get();
+
+          const updatedCartProducts = cart.map((item) => {
+            if (item.id === product.id && item.size === product.size) {
+              return { ...item, quantity: quantity };
+            }
+
+            return item;
+          });
+
+          set({ cart: updatedCartProducts });
+        },
+        removeProduct: (size) => {
+          const { cart } = get();
+
+          const updatedCartProducts = cart.filter((item) => {
+            if (item.size !== size) return item;
+          });
+
+          set({ cart: updatedCartProducts });
         },
       }),
       {
