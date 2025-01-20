@@ -1,14 +1,24 @@
 "use client";
 
-import { authenticate } from "@/actions";
+import { useActionState, useEffect } from "react";
 import Link from "next/link";
-import { useActionState } from "react";
+import { authenticate } from "@/actions";
+import { IoInformationOutline } from "react-icons/io5";
+import clsx from "clsx";
+import { useRouter } from "next/navigation";
 
 export const LoginForm = () => {
-  const [errorMessage, formAction, isPending] = useActionState(
+  const router = useRouter();
+  const [actionMessage, formAction, isPending] = useActionState(
     authenticate,
     undefined
   );
+
+  useEffect(() => {
+    if (actionMessage === "success") {
+      router.replace("/");
+    }
+  }, [actionMessage, router]);
 
   return (
     <form action={formAction} className="flex flex-col">
@@ -28,8 +38,28 @@ export const LoginForm = () => {
         name="password"
       />
 
-      <button type="submit" className="btn-primary">
-        Ingresar
+      <div
+        className="flex h-8 items-end space-x-1"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {(actionMessage === "CredentialsSignin" ||
+          actionMessage === "Something went wrong") && (
+          <div className="flex items-center rounded my-3 p-1 px-3 bg-red-600 text-white fade-in">
+            <IoInformationOutline className="h-5 w-5" />
+            <p className="text-sm">Verifique las credenciales</p>
+          </div>
+        )}
+      </div>
+
+      <button
+        type="submit"
+        className={`btn-primary disabled:bg-opacity-70 ${clsx({
+          "cursor-wait": isPending,
+        })}`}
+        disabled={isPending}
+      >
+        {isPending ? "Iniciando sesión..." : "Ingresar"}
       </button>
 
       {/* divisor l ine */}
