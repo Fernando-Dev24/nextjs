@@ -5,6 +5,7 @@ export * from "./product/slideshow/product-slideshow";
 export * from "./product/stock-label/stock-label";
 export * from "./products/grids/product-grid-item";
 export * from "./products/grids/products-grid";
+export * from "./provider/Provider";
 export * from "./ui/footer/footer";
 export * from "./ui/not-found/page-not-found";
 export * from "./ui/pagination/pagination";

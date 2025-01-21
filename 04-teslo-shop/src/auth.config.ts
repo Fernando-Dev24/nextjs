@@ -32,11 +32,23 @@ export const authConfig: NextAuthConfig = {
         // Regresar la informacion del usuario sin el password
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { password: _, ...rest } = user;
-        console.log({ rest });
         return rest;
       },
     }),
   ],
+  callbacks: {
+    jwt({ token, user }) {
+      if (user) {
+        token.data = user;
+      }
+      return token;
+    },
+    session({ session, token }) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      session.user = token.data as any;
+      return session;
+    },
+  },
 };
 
-export const { signIn, signOut, auth } = NextAuth(authConfig);
+export const { signIn, signOut, auth, handlers } = NextAuth(authConfig);
