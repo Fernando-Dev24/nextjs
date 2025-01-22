@@ -36,6 +36,7 @@ enum Gender {
 enum Role {
   admin
   user
+  banned
 }
 
 // tablas

@@ -1,7 +1,10 @@
 "use client";
 
+import { login, registerUser } from "@/actions";
+import clsx from "clsx";
 import Link from "next/link";
-import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 type FormInputs = {
   name: string;
@@ -10,30 +13,68 @@ type FormInputs = {
 };
 
 export const RegisterForm = () => {
-  const { register, handleSubmit } = useForm<FormInputs>();
+  const [errorMessage, setErrorMessage] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormInputs>();
+  const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+  const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+    setErrorMessage("");
+    const { name, email, password } = data;
+    // server action
+    const resp = await registerUser(name, email, password);
+
+    if (!resp.ok) {
+      setErrorMessage(resp.message);
+      return;
+    }
+
+    await login(email.toLowerCase(), password);
+    // router.replace("/"); // Esto no recargara la pagina
+    window.location.href = "/"; // Esto si recargara la pagina
+  };
 
   return (
-    <div className="flex flex-col">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+      {errors.name?.type === "required" && (
+        <span className="text-red-500">* El nombre es obligatorio</span>
+      )}
+
       <label htmlFor="username">Nombre Completo</label>
       <input
-        className="px-5 py-2 border bg-gray-200 rounded mb-5"
+        className={clsx("px-5 py-2 border bg-gray-200 rounded mb-5", {
+          "border-red-500": !!errors?.name,
+        })}
         type="text"
         id="username"
+        autoFocus
+        {...register("name", { required: true })}
       />
 
       <label htmlFor="email">Correo electrónico</label>
       <input
-        className="px-5 py-2 border bg-gray-200 rounded mb-5"
+        className={clsx("px-5 py-2 border bg-gray-200 rounded mb-5", {
+          "border-red-500": !!errors?.email,
+        })}
         type="email"
         id="email"
+        {...register("email", { required: true, pattern: emailRegEx })}
       />
 
       <label htmlFor="password">Contraseña</label>
       <input
-        className="px-5 py-2 border bg-gray-200 rounded mb-5"
+        className={clsx("px-5 py-2 border bg-gray-200 rounded mb-5", {
+          "border-red-500": !!errors?.password,
+        })}
         type="password"
         id="password"
+        {...register("password", { required: true, minLength: 6 })}
       />
+
+      <span className="text-red-500">{errorMessage}</span>
 
       <button className="btn-primary">Crear cuenta</button>
 
@@ -47,6 +88,6 @@ export const RegisterForm = () => {
       <Link href="/auth/login" className="btn-secondary text-center">
         Ingresar con cuenta existente
       </Link>
-    </div>
+    </form>
   );
 };

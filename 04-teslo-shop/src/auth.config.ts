@@ -4,6 +4,8 @@ import { z } from "zod";
 import prisma from "./lib/prisma";
 import bcrypt from "bcryptjs";
 
+const protectedRoutes = ["/checkout/address", "/checkout"];
+
 export const authConfig: NextAuthConfig = {
   pages: {
     signIn: "/auth/login",
@@ -28,6 +30,7 @@ export const authConfig: NextAuthConfig = {
         // Comparar credenciales
         if (!user) return null;
         if (!bcrypt.compareSync(password, user.password)) return null;
+        if (user.role.includes("banned")) return null;
 
         // Regresar la informacion del usuario sin el password
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -47,6 +50,20 @@ export const authConfig: NextAuthConfig = {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       session.user = token.data as any;
       return session;
+    },
+    authorized({ auth, request: { nextUrl } }) {
+      console.log(auth);
+      const isLoggedIn = !!auth?.user;
+      const isOnProtectedRoute = protectedRoutes.includes(nextUrl.pathname);
+      if (isOnProtectedRoute) {
+        if (isLoggedIn) return true;
+        return false; // Redirect unauthenticated users to login page
+      } else if (isLoggedIn) {
+        if (nextUrl.pathname === "/auth/login") {
+          return Response.redirect(new URL("/", nextUrl));
+        }
+      }
+      return true;
     },
   },
 };
