@@ -52,7 +52,6 @@ export const authConfig: NextAuthConfig = {
       return session;
     },
     authorized({ auth, request: { nextUrl } }) {
-      console.log(auth);
       const isLoggedIn = !!auth?.user;
       const isOnProtectedRoute = protectedRoutes.includes(nextUrl.pathname);
       if (isOnProtectedRoute) {
