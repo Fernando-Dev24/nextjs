@@ -1,11 +1,17 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import clsx from "clsx";
-import type { Country } from "@/interfaces";
+import { redirect } from "next/navigation";
+import { useAdressStore } from "@/store";
+import { deleteUserAddress, setUserAddress } from "@/actions";
+import { useSessionProvider } from "@/components";
+import type { Address, Country } from "@/interfaces";
 
 interface Props {
   countries: Country[];
+  userStoredAddress?: Partial<Address>; // Cuando queramos dar un valor inicial en caso de que no venga presente en una interfaz, en lugar de crear un objeto desde cero para dejarlo como el estado inicial podemos usar un Partial que hace que todas las keyprops de un objeto sean opciones
 }
 
 type FormInputs = {
@@ -20,19 +26,46 @@ type FormInputs = {
   rememberAddress: boolean;
 };
 
-export const AddressForm = ({ countries }: Props) => {
+export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
   const {
     register,
     handleSubmit,
     formState: { isValid },
+    reset,
   } = useForm<FormInputs>({
     defaultValues: {
-      // TODO: leer de la base de datos
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ...(userStoredAddress as any),
+      rememberAddress: false,
     },
   });
 
+  /* const { data: session } = useSession({ required: true }); al pasar el objeto de opciones con el required en true estamos obligando a la person a que si no se ha autenticado que lo haga */
+  const { session } = useSessionProvider();
+
+  const setAddress = useAdressStore((state) => state.setAddress);
+  const storedAddress = useAdressStore((state) => state.address);
+
+  if (!session?.user.id) redirect("/auth/login");
+
+  useEffect(() => {
+    if (storedAddress.firstName) {
+      reset(storedAddress);
+    }
+  }, [reset, storedAddress]);
+
   const onSubmit = (data: FormInputs) => {
-    console.log({ data });
+    setAddress(data);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { rememberAddress: _, ...rest } = data;
+
+    if (data?.rememberAddress) {
+      // DONE create or update server action
+      setUserAddress(rest, session.user.id);
+    } else {
+      // done: delete server action
+      deleteUserAddress(session.user.id);
+    }
   };
 
   return (

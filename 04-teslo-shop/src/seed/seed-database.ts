@@ -6,6 +6,7 @@ async function main() {
   if (process.env.NODE_ENV === "production") return;
 
   // 1. Borrar registros
+  await prisma.userAddress.deleteMany();
   await prisma.countries.deleteMany();
   await prisma.user.deleteMany();
   await prisma.productImage.deleteMany();
