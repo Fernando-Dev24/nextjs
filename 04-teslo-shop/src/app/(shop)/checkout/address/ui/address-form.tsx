@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import clsx from "clsx";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useAdressStore } from "@/store";
 import { deleteUserAddress, setUserAddress } from "@/actions";
 import { useSessionProvider } from "@/components";
@@ -46,6 +46,8 @@ export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
   const setAddress = useAdressStore((state) => state.setAddress);
   const storedAddress = useAdressStore((state) => state.address);
 
+  const router = useRouter();
+
   if (!session?.user.id) redirect("/auth/login");
 
   useEffect(() => {
@@ -55,9 +57,9 @@ export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
   }, [reset, storedAddress]);
 
   const onSubmit = (data: FormInputs) => {
-    setAddress(data);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { rememberAddress: _, ...rest } = data;
+    setAddress(rest);
 
     if (data?.rememberAddress) {
       // DONE create or update server action
@@ -66,6 +68,8 @@ export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
       // done: delete server action
       deleteUserAddress(session.user.id);
     }
+
+    router.replace("/checkout");
   };
 
   return (
