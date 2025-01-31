@@ -1,10 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { useCartStore } from "@/store";
 import { QuantitySelector } from "@/components";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 
 export const ProductsInCart = () => {
   const [loaded, setLoaded] = useState(false);

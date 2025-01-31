@@ -15,6 +15,7 @@ interface State {
   addProductToCart: (product: CartProduct) => void;
   updateProductQuantity: (product: CartProduct, quantity: number) => void;
   removeProduct: (size: string) => void;
+  clearCart: () => void;
 }
 
 // Persist middlware guarda el estado automaticamente en localstorage y lo recupera al mismo tiempo para usarlo
@@ -93,6 +94,9 @@ export const useCartStore = create<State>()(
           });
 
           set({ cart: updatedCartProducts });
+        },
+        clearCart: () => {
+          set({ cart: [] });
         },
       }),
       {
