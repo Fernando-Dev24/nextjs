@@ -1,6 +1,6 @@
 import { auth } from "@/auth.config";
 import { TopMenu, Sidebar, Footer } from "@/components";
-import { SessionProvider } from "../../components/provider/Provider";
+import { SessionProviders } from "../../components/providers/Providers";
 
 export default async function ShopLayout({
   children,
@@ -11,12 +11,12 @@ export default async function ShopLayout({
 
   return (
     <main className="min-h-screen">
-      <SessionProvider session={session}>
+      <SessionProviders session={session}>
         <TopMenu />
         <Sidebar />
         <div className="px-0 sm:px-10">{children}</div>
         <Footer />
-      </SessionProvider>
+      </SessionProviders>
     </main>
   );
 }

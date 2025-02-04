@@ -16,11 +16,11 @@ import {
   IoShirtOutline,
   IoPeopleOutline,
 } from "react-icons/io5";
-import { useSessionProvider } from "@/components/provider/Provider";
+import { useSessionProviders } from "@/components/providers/Providers";
 
 export const Sidebar = () => {
   const { isSideMenuOpen, closeSideMenu } = useUIStore((state) => state);
-  const { session } = useSessionProvider();
+  const { session } = useSessionProviders();
   const isAuthenticated = !!session?.user;
 
   return (
