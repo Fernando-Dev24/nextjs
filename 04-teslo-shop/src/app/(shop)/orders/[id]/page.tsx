@@ -3,8 +3,7 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 import { getOrderById } from "@/actions";
 import { currencyFormat } from "@/utils";
-import { OrderState } from "@/components";
-import { PaypalButton } from "@/components";
+import { OrderState, PaypalButton } from "@/components";
 
 interface Props {
   params: Promise<{
@@ -105,8 +104,11 @@ export default async function SingleOrderPage({ params }: Props) {
 
             {/* IS PAIS STATE */}
             <div className="mt-5 mb-2 w-full">
-              <OrderState isPaid={order?.isPaid ?? false} />
-              <PaypalButton />
+              {order?.isPaid ? (
+                <OrderState isPaid={order?.isPaid ?? false} />
+              ) : (
+                <PaypalButton orderId={order!.id} amount={order!.total} />
+              )}
             </div>
           </div>
         </div>
