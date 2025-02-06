@@ -6,7 +6,7 @@ import clsx from "clsx";
 import { redirect, useRouter } from "next/navigation";
 import { useAdressStore } from "@/store";
 import { deleteUserAddress, setUserAddress } from "@/actions";
-import { useSessionProvider } from "@/components";
+import { useSessionProviders } from "@/components";
 import type { Address, Country } from "@/interfaces";
 
 interface Props {
@@ -41,7 +41,7 @@ export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
   });
 
   /* const { data: session } = useSession({ required: true }); al pasar el objeto de opciones con el required en true estamos obligando a la person a que si no se ha autenticado que lo haga */
-  const { session } = useSessionProvider();
+  const { session } = useSessionProviders();
 
   const setAddress = useAdressStore((state) => state.setAddress);
   const storedAddress = useAdressStore((state) => state.address);

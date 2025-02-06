@@ -1,7 +1,13 @@
 "use client";
 
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
-import { CreateOrderActions, CreateOrderData } from "@paypal/paypal-js";
+import {
+  CreateOrderActions,
+  CreateOrderData,
+  OnApproveActions,
+  OnApproveData,
+} from "@paypal/paypal-js";
+import { paypalCheckPayment, setTransactionId } from "@/actions";
 
 interface Props {
   orderId: string;
@@ -28,14 +34,35 @@ export const PaypalButton = ({ orderId, amount }: Props) => {
     const transactionId = await actions.order.create({
       intent: "CAPTURE",
       purchase_units: [
-        { amount: { value: `${roundedAmount}`, currency_code: "USD" } },
+        {
+          invoice_id: orderId,
+          amount: { value: `${roundedAmount}`, currency_code: "USD" },
+        },
       ],
     });
 
-    console.log({ transactionId });
+    /* console.log({ transactionId }); */
+    // Guardar el id en la orden de la base de datos
+    const { ok, message } = await setTransactionId(orderId, transactionId);
+    if (!ok) throw new Error(message);
 
     return transactionId;
   };
 
-  return <PayPalButtons createOrder={createOrder} /* onApprove={} */ />;
+  const onApprove = async (
+    data: OnApproveData,
+    actions: OnApproveActions
+  ): Promise<void> => {
+    const details = await actions.order?.capture(); // captura el id de paypal de la orden
+    if (!details?.id) return;
+
+    await paypalCheckPayment(details.id);
+  };
+
+  return (
+    <PayPalButtons
+      createOrder={createOrder} // al momento de acceder a la pasarela de pago de paypal
+      onApprove={onApprove} //  esto se ejecuta cuando el pago es aprobado
+    />
+  );
 };
