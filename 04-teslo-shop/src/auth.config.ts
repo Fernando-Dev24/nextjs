@@ -5,6 +5,12 @@ import prisma from "./lib/prisma";
 import bcrypt from "bcryptjs";
 
 const protectedRoutes = ["/checkout/address", "/checkout"];
+const adminRoutes = [
+  "/admin",
+  "/admin/users",
+  "/admin/orders",
+  "/admin/products",
+];
 
 export const authConfig: NextAuthConfig = {
   pages: {
@@ -54,14 +60,29 @@ export const authConfig: NextAuthConfig = {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnProtectedRoute = protectedRoutes.includes(nextUrl.pathname);
+      const isOnAdminRoute = adminRoutes.some((route) =>
+        nextUrl.pathname.startsWith(route)
+      );
+
+      /* redirect to users whose not login in and he is on protected route */
       if (isOnProtectedRoute) {
         if (isLoggedIn) return true;
-        return false; // Redirect unauthenticated users to login page
-      } else if (isLoggedIn) {
+        return false;
+      }
+
+      /* redirect users whose not admin and he is on admin route */
+      if (isOnAdminRoute) {
+        if (isLoggedIn && auth?.user.role === "admin") return true;
+        return false;
+      }
+
+      /* redirect users to login when not logged in */
+      if (isLoggedIn) {
         if (nextUrl.pathname === "/auth/login") {
           return Response.redirect(new URL("/", nextUrl));
         }
       }
+
       return true;
     },
   },
