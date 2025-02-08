@@ -59,11 +59,6 @@ const getPaypalBearerToken = async (): Promise<string | null> => {
   const PAYPAL_SECRET = process.env.PAYPAL_SECRET ?? "";
   const PAYPAL_OAUTH_URL = process.env.PAYPAL_OAUTH_URL ?? "";
 
-  console.log({
-    PAYPAL_CLIENT_ID,
-    PAYPAL_SECRET,
-  });
-
   const base64Token = Buffer.from(
     `${PAYPAL_CLIENT_ID}:${PAYPAL_SECRET}`,
     "utf-8"

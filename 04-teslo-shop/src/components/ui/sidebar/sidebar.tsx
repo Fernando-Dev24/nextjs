@@ -114,6 +114,7 @@ export const Sidebar = () => {
 
         {/* LINE SEPARATOR */}
 
+        {/* OPCIONES DE ADMINISTRADOR */}
         {session?.user.role.includes("admin") && (
           <>
             <div className="w-full h-px bg-gray-200 my-10" />
@@ -126,7 +127,7 @@ export const Sidebar = () => {
             </Link>
 
             <Link
-              href={"/"}
+              href={"/admin/orders"}
               onClick={closeSideMenu}
               className="flex items-center mt-10 p-2 rounded-md hover:bg-gray-100 rounded-transition-all"
             >
@@ -135,7 +136,8 @@ export const Sidebar = () => {
             </Link>
 
             <Link
-              href={"/"}
+              href={"/admin/users"}
+              onClick={closeSideMenu}
               className="flex items-center mt-10 p-2 rounded-md hover:bg-gray-100 rounded-transition-all"
             >
               <IoPeopleOutline size={30} />
