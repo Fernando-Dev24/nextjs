@@ -14,3 +14,4 @@ export * from "./ui/title/title";
 export * from "./ui/top-menu/top-menu";
 export * from "./orders/order-state";
 export * from "./paypal/paypal-button";
+export * from "./product/product-image/product-image";

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useCartStore } from "@/store";
-import { QuantitySelector } from "@/components";
+import { ProductImage, QuantitySelector } from "@/components";
 import { useEffect, useState } from "react";
 
 export const ProductsInCart = () => {
@@ -25,8 +25,8 @@ export const ProductsInCart = () => {
       {productsInCart.length >= 1 &&
         productsInCart.map((product) => (
           <div key={`${product.slug}-${product.size}`} className="flex mb-5">
-            <Image
-              src={`/products/${product.image}`}
+            <ProductImage
+              src={product.image}
               width={100}
               height={100}
               style={{
