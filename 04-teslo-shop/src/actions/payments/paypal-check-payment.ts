@@ -6,7 +6,6 @@ import { revalidatePath } from "next/cache";
 
 export const paypalCheckPayment = async (paypalTransactionId: string) => {
   const authToken = await getPaypalBearerToken();
-  console.log({ authToken });
 
   if (!authToken) {
     return {

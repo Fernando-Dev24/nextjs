@@ -17,3 +17,4 @@ export * from "./order/get-paginated-orders";
 export * from "./user/get-paginated-users";
 export * from "./user/change-user-role";
 export * from "./product/get-product-categories";
+export * from "./product/create-update-product";
