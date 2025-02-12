@@ -111,6 +111,7 @@ export const createUpdateProduct = async (formData: FormData) => {
       product: prismaTx.product,
     };
   } catch (error) {
+    console.log(error);
     return {
       ok: false,
       error: "Error al ejecutar la acción",

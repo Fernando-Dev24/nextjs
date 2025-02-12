@@ -2,7 +2,6 @@
 
 import { Product, ProductCategory, ProductImage } from "@/interfaces";
 import { useForm } from "react-hook-form";
-import Image from "next/image";
 import clsx from "clsx";
 import { createUpdateProduct, deleteProductImage } from "@/actions";
 import { useRouter } from "next/navigation";
@@ -58,6 +57,8 @@ export const ProductForm = ({ product, categories }: Props) => {
   };
 
   const onSubmit = async (data: FormInputs) => {
+    if (!isValid) return;
+
     const formData = new FormData();
 
     const { images, ...productToSave } = data;

@@ -2,7 +2,6 @@
 
 // Import Swiper React components
 import { useState } from "react";
-import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperObject } from "swiper";
 import { Autoplay, FreeMode, Navigation, Thumbs } from "swiper/modules";
